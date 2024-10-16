@@ -1,9 +1,23 @@
 import express from 'express'
+import cors from 'cors'
+import { app } from './app';
+import { Server } from 'http';
 
-const app = express();
+
+const server = express();
+
+server.use(cors());
+server.use(app)
+
+
 
 const port = 3000;
 
-app.listen(port, () => {
-    console.log('server listening on port', port)
-})
+async function main() {
+    const serverMain: Server = server.listen(port, () => {
+        console.log(`Server is running on http://localhost:${port}`)
+    })
+}
+
+
+main()

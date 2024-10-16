@@ -4,9 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "migrate": "npx prisma migrate dev",
+    "generate": "npx prisma generate",
+    "studio": "npx prisma studio"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.7.5",
     "prisma": "^5.21.0",
@@ -15,6 +19,7 @@
     "typescript": "^5.6.3"
   },
   "dependencies": {
+    "@prisma/client": "^5.21.0",
     "cors": "^2.8.5",
     "express": "^4.21.1"
   }
