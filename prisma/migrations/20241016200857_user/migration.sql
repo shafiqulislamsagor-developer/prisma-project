@@ -6,7 +6,7 @@ CREATE TABLE "user" (
     "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "role" "UserRole" NOT NULL,
+    "role" "UserRole" NOT NULL DEFAULT 'CUSTOMAER',
     "isBlocked" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -17,10 +17,11 @@ CREATE TABLE "user" (
 CREATE TABLE "profile" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "profilePhoto" TEXT,
+    "phoneNumber" TEXT,
+    "address" TEXT,
     "email" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
     "lastModified" TIMESTAMP(3) NOT NULL,
-    "bio" TEXT NOT NULL,
 
     CONSTRAINT "profile_pkey" PRIMARY KEY ("id")
 );
@@ -31,8 +32,5 @@ CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "profile_email_key" ON "profile"("email");
 
--- CreateIndex
-CREATE UNIQUE INDEX "profile_userId_key" ON "profile"("userId");
-
 -- AddForeignKey
-ALTER TABLE "profile" ADD CONSTRAINT "profile_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "profile" ADD CONSTRAINT "profile_email_fkey" FOREIGN KEY ("email") REFERENCES "user"("email") ON DELETE RESTRICT ON UPDATE CASCADE;

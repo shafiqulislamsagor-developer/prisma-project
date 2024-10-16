@@ -17,10 +17,10 @@ model User {
   id        String   @id @default(uuid())
   email     String   @unique
   password  String
-  role      UserRole
+  role      UserRole @default(CUSTOMAER)
   isBlocked Boolean  @default(false)
   createdAt DateTime @default(now())
-  Profile   Profile?
+  profile   Profile?
 
   @@map("user")
 }
@@ -28,12 +28,13 @@ model User {
 model Profile {
   id           String   @id @default(uuid())
   name         String
+  profilePhoto String?
+  phoneNumber  String?
+  address      String?
   email        String   @unique
-  userId       String   @unique
   lastModified DateTime @updatedAt
-  bio          String
 
-  userUniqueId User @relation(fields: [userId], references: [id])
+  userUniqueId User @relation(fields: [email], references: [email])
 
   @@map("profile")
 }
