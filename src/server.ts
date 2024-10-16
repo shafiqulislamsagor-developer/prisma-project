@@ -1,23 +1,17 @@
-import express from 'express'
-import cors from 'cors'
-import { app } from './app';
-import { Server } from 'http';
+import { Server } from "http"
+import { app } from "./app"
+require('dotenv').config()
 
-
-const server = express();
-
-server.use(cors());
-server.use(app)
-
-
-
-const port = 3000;
+const port = process.env.PORT
 
 async function main() {
-    const serverMain: Server = server.listen(port, () => {
+    const serverMain: Server = app.listen(port, () => {
         console.log(`Server is running on http://localhost:${port}`)
     })
 }
 
 
-main()
+main().catch(err => {
+    console.error(err)
+    process.exit(1)
+})

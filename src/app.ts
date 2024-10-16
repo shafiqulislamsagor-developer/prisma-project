@@ -1,12 +1,14 @@
-import { Router } from "express"
+import express from 'express'
+import cors from 'cors'
+import { userRouter } from './app/modules/user/user.routes';
 
-export const app = Router()
+
+export const app = express();
 
 
 
-app.get('/', (req, res) => {
-    res.send({
-        message: 'Hello, World!'
-    })
-})
+app.use(cors());
+
+app.use('/api/v1/user', userRouter)
+
 
